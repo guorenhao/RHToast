@@ -32,7 +32,7 @@
  @param message  显示内容
  @param duration 显示时长
  */
-+ (void)showWithMessage:(NSString *)message duration:(NSInteger)duration {
++ (void)showWithMessage:(NSString *)message duration:(NSTimeInterval)duration {
     
     [self showWithMessage:message duration:duration rotation:0];
 }
@@ -55,7 +55,7 @@
  @param duration 显示时间
  @param rotation 旋转角度
  */
-+ (void)showWithMessage:(NSString *)message duration:(NSInteger)duration rotation:(CGFloat)rotation {
++ (void)showWithMessage:(NSString *)message duration:(NSTimeInterval)duration rotation:(CGFloat)rotation {
     
     UIWindow * keyWindow = [UIApplication sharedApplication].keyWindow;
     CGRect frame = keyWindow.bounds;
