@@ -10,15 +10,13 @@
 
 #define RH_Toast_SWidth        [UIScreen mainScreen].bounds.size.width
 #define RH_Toast_SHeight       [UIScreen mainScreen].bounds.size.height
-#define RH_Toast_ScaleSize     RH_Toast_SWidth / 375
-#define RH_Toast_SS(a)         RH_Toast_ScaleSize * (a)
 
 @implementation RHToast
 
 
 /**
  弹出toast
-
+ 
  @param message  显示内容
  */
 + (void)showWithMessage:(NSString *)message {
@@ -28,7 +26,7 @@
 
 /**
  弹出toast
-
+ 
  @param message  显示内容
  @param duration 显示时长
  */
@@ -39,7 +37,7 @@
 
 /**
  弹出toast
-
+ 
  @param message  显示内容
  @param rotation 旋转角度
  */
@@ -59,34 +57,34 @@
     
     UIWindow * keyWindow = [UIApplication sharedApplication].keyWindow;
     CGRect frame = keyWindow.bounds;
-
+    
     __block UIView * bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, RH_Toast_SWidth, RH_Toast_SHeight)];
     bgView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
     
-    UIView * bgView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, RH_Toast_SS(150), RH_Toast_SS(48))];
-    UITextView * textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, RH_Toast_SS(150), RH_Toast_SS(48))];
-    textView.textContainerInset = UIEdgeInsetsMake(RH_Toast_SS(15), RH_Toast_SS(15), RH_Toast_SS(15), RH_Toast_SS(15));
-    textView.layer.cornerRadius = RH_Toast_SS(8);
+    UIView * bgView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self SS:150], [self SS:48])];
+    UITextView * textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, [self SS:150], [self SS:48])];
+    textView.textContainerInset = UIEdgeInsetsMake([self SS:15], [self SS:15], [self SS:15], [self SS:15]);
+    textView.layer.cornerRadius = [self SS:8];
     textView.layer.masksToBounds = YES;
-    textView.font = [UIFont systemFontOfSize:RH_Toast_SS(15)];
+    textView.font = [UIFont systemFontOfSize:[self SS:15]];
     textView.textColor = [UIColor whiteColor];
     textView.textAlignment = NSTextAlignmentCenter;
     textView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
     textView.editable = NO;
     textView.text = message;
     
-    CGFloat width = [self getTextViewWidthByText:message font:[UIFont systemFontOfSize:RH_Toast_SS(15)]];
-    if (width > RH_Toast_SS(150)) {
+    CGFloat width = [self getTextViewWidthByText:message font:[UIFont systemFontOfSize:[self SS:15]]];
+    if (width > [self SS:150]) {
         
-        if (width > RH_Toast_SS(200)) {
+        if (width > [self SS:200]) {
             
-            CGFloat height = [self getTextViewHeightByText:message font:[UIFont systemFontOfSize:RH_Toast_SS(15)] width:RH_Toast_SS(200)];
-            textView.frame = CGRectMake(0, 0, RH_Toast_SS(200), height);
-            bgView2.frame = CGRectMake(0, 0, RH_Toast_SS(200), height);
+            CGFloat height = [self getTextViewHeightByText:message font:[UIFont systemFontOfSize:[self SS:15]] width:[self SS:200]];
+            textView.frame = CGRectMake(0, 0, [self SS:200], height);
+            bgView2.frame = CGRectMake(0, 0, [self SS:200], height);
         } else {
             
-            textView.frame = CGRectMake(0, 0, width, RH_Toast_SS(48));
-            bgView2.frame = CGRectMake(0, 0, width, RH_Toast_SS(48));
+            textView.frame = CGRectMake(0, 0, width, [self SS:48]);
+            bgView2.frame = CGRectMake(0, 0, width, [self SS:48]);
         }
     }
     
@@ -123,7 +121,7 @@
 + (CGFloat)getTextViewWidthByText:(NSString *)text font:(UIFont *)font {
     
     UITextView * textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, MAXFLOAT, 0)];
-    textView.textContainerInset = UIEdgeInsetsMake(RH_Toast_SS(15), RH_Toast_SS(15), RH_Toast_SS(15), RH_Toast_SS(15));
+    textView.textContainerInset = UIEdgeInsetsMake([self SS:15], [self SS:15], [self SS:15], [self SS:15]);
     textView.text = text;
     textView.font = font;
     [textView sizeToFit];
@@ -134,7 +132,7 @@
 + (CGFloat)getTextViewHeightByText:(NSString *)text font:(UIFont *)font width:(CGFloat)width {
     
     UITextView * textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
-    textView.textContainerInset = UIEdgeInsetsMake(RH_Toast_SS(15), RH_Toast_SS(15), RH_Toast_SS(15), RH_Toast_SS(15));
+    textView.textContainerInset = UIEdgeInsetsMake([self SS:15], [self SS:15], [self SS:15], [self SS:15]);
     textView.text = text;
     textView.font = font;
     [textView sizeToFit];
@@ -142,5 +140,18 @@
     return height;
 }
 
++ (CGFloat)SS:(CGFloat)num {
+    
+    if (RH_Toast_SWidth < RH_Toast_SHeight) {
+        
+        CGFloat scaleSize = RH_Toast_SWidth / 375.0;
+        return num * scaleSize;
+    } else {
+        
+        CGFloat scaleSize = RH_Toast_SHeight / 375.0;
+        return num * scaleSize;
+    }
+}
 
 @end
+
