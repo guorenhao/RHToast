@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "RHToast"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "RHToast 是一款简单的toast弹框"
   s.homepage     = "https://github.com/guorenhao/RHToast"
   s.license      = "MIT"
