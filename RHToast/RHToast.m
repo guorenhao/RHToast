@@ -66,19 +66,19 @@
     textView.textContainerInset = UIEdgeInsetsMake([self SS:15], [self SS:15], [self SS:15], [self SS:15]);
     textView.layer.cornerRadius = [self SS:8];
     textView.layer.masksToBounds = YES;
-    textView.font = [UIFont systemFontOfSize:[self SS:15]];
+    textView.font = [UIFont fontWithName:@"Helvetica" size:[self SS:15]];
     textView.textColor = [UIColor whiteColor];
     textView.textAlignment = NSTextAlignmentCenter;
     textView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
     textView.editable = NO;
     textView.text = message;
     
-    CGFloat width = [self getTextViewWidthByText:message font:[UIFont systemFontOfSize:[self SS:15]]];
+    CGFloat width = [self getTextViewWidthByText:message font:[UIFont fontWithName:@"Helvetica" size:[self SS:15]]];
     if (width > [self SS:150]) {
         
         if (width > [self SS:200]) {
             
-            CGFloat height = [self getTextViewHeightByText:message font:[UIFont systemFontOfSize:[self SS:15]] width:[self SS:200]];
+            CGFloat height = [self getTextViewHeightByText:message font:[UIFont fontWithName:@"Helvetica" size:[self SS:15]] width:[self SS:200]];
             textView.frame = CGRectMake(0, 0, [self SS:200], height);
             bgView2.frame = CGRectMake(0, 0, [self SS:200], height);
         } else {
